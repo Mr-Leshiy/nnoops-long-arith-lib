@@ -1,6 +1,5 @@
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
-add_subdirectory(algorithms)
 add_subdirectory(long_arithmetic)
 
 set(SOURCES
