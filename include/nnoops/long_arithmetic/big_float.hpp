@@ -168,12 +168,16 @@ struct BigFloat {
     result.normalize();
   }
 
-  friend void division(BigFloatT dividend,
-                       BigFloatT divisor,
+  friend void division(const BigFloatT& dividend,
+                       const BigFloatT& divisor,
                        BigFloatT& quotient) {
-    (void)dividend;
-    (void)divisor;
-    (void)quotient;
+    if (dividend == divisor) {
+      // a / a == 1
+      quotient = BigFloatT(1);
+      return;
+    }
+
+    multiplication(dividend, divisor.inverse(), quotient);
   }
 
   // return -1 if this less than b,

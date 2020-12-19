@@ -1,6 +1,5 @@
 name: CI
 
-
 on:
   push:
     branches:
@@ -17,10 +16,10 @@ jobs:
       fail-fast: false
       matrix:
         flags: [
-          "-DCLANG_TIDY=ON,
-          "-DASAN=ON,
-          "-DUBSAN=ON,
-          "-DCMAKE_BUILD_TYPE=Release
+          "-DCLANG_TIDY=ON",
+          "-DASAN=ON",
+          "-DUBSAN=ON",
+          "-DCMAKE_BUILD_TYPE=Release",
         ]
     env:
       CC: clang
@@ -100,4 +99,4 @@ jobs:
       - name: build
         run: cmake --build build -- -j2
       - name: test
-         run: cd build && ctest
+        run: cd build && ctest
