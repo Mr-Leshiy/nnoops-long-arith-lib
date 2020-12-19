@@ -1,7 +1,7 @@
 ![CI](https://github.com/Mr-Leshiy/nnoops-lib/workflows/CI/badge.svg)
 
-# Nnoops library
-Library for building, training neural networks.
+# Nnoops long arithmetic library
+This library provides realisation of the long integer numbers(signed and unsigned) and big float numbers.
 
 ## Build Linux
 ```sh
