@@ -7,6 +7,7 @@ using namespace nnoops;
 
 TEST(BigFloat, multiplication_test) {
   using BigFloatT = BigFloat<1024>;
+
   BigFloatT val1("3124.3312");
   BigFloatT val2("-12.41551");
 
@@ -33,6 +34,7 @@ TEST(BigFloat, multiplication_test) {
 
 TEST(BigFloat, inverse_test) {
   using BigFloatT = BigFloat<1024>;
+
   BigFloatT val("5.0");
 
   EXPECT_EQ(val.inverse(), BigFloatT("0.2"));
@@ -47,13 +49,37 @@ TEST(BigFloat, inverse_test) {
 
   EXPECT_EQ(val.inverse(), BigFloatT("0.0002418605100717357"));
 
+  // accuracy - 15
   val = BigFloatT("0.245555542", 15);
 
   EXPECT_EQ(val.inverse(), BigFloatT("4.072398414856383"));
 
+  // accuracy - 15
   val = BigFloatT("-0.245555542", 15);
 
   EXPECT_EQ(val.inverse(), BigFloatT("-4.072398414856383"));
+}
+
+TEST(BigFloat, division_test) {
+  using BigFloatT = BigFloat<1024>;
+
+  // accuracy - 5
+  BigFloatT val1("13.0", 5);
+  BigFloatT val2("4.0", 5);
+
+  EXPECT_EQ(val1 / val2, BigFloatT("3.25"));
+  EXPECT_EQ(val2 / val1, BigFloatT("0.30768"));
+  EXPECT_EQ(val1 / val1, BigFloatT("1.0"));
+  EXPECT_EQ(val2 / val2, BigFloatT("1.0"));
+
+  // accuracy - 5
+  val1 = BigFloatT("121.0", 6);
+  val2 = BigFloatT("5", 6);
+
+  EXPECT_EQ(val1 / val2, BigFloatT("24.2"));
+  EXPECT_EQ(val2 / val1, BigFloatT("0.04132"));
+  EXPECT_EQ(val1 / val1, BigFloatT("1.0"));
+  EXPECT_EQ(val2 / val2, BigFloatT("1.0"));
 }
 
 TEST(BigFloat, toPrettyString_test) {
