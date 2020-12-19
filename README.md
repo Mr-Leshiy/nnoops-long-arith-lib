@@ -1,4 +1,4 @@
-![CI](https://github.com/Mr-Leshiy/nnoops-lib/workflows/CI/badge.svg)
+![CI](https://github.com/Mr-Leshiy/nnoops-nnoops-long-arith-lib/workflows/CI/badge.svg)
 
 # Nnoops library
 Library for building, training neural networks.
