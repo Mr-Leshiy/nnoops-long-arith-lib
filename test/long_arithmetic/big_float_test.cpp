@@ -5,6 +5,23 @@
 #include "nnoops/long_arithmetic/big_float.hpp"
 using namespace nnoops;
 
+TEST(BigFloat, addition_test) {
+  using BigFloatT = BigFloat<1024>;
+
+  BigFloatT val1("3124.3312");
+  BigFloatT val2("-12.41551");
+
+  EXPECT_EQ(toPrettyString(val1 + val2), "");
+  EXPECT_EQ(val1 + val2, BigFloatT("3111.91569"));
+  EXPECT_EQ(val2 + val1, BigFloatT("3111.91569"));
+
+  val1 = BigFloatT("0.312415");
+  val2 = BigFloatT("0.00000312");
+
+  EXPECT_EQ(val1 + val2, BigFloatT("0.31241812"));
+  EXPECT_EQ(val2 + val1, BigFloatT("0.31241812"));
+}
+
 TEST(BigFloat, multiplication_test) {
   using BigFloatT = BigFloat<1024>;
 

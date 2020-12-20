@@ -70,6 +70,20 @@ struct BigFloat {
 
   BigFloat(int64_t val) { init(val); }
 
+  bool getSign() const { return this->mantissa.getSign(); }
+
+  void setSign(bool v) { return this->mantissa.setSign(v); }
+
+  void changeSign() { this->mantissa.changeSign(); }
+
+  BigFloatT operator-() const {
+    BigFloatT ret;
+    ret.mantissa = -this->mantissa;
+    ret.exponent = this->exponent;
+    ret.accuracy = this->accuracy;
+    return ret;
+  }
+
   BigFloatT& operator+=(const BigFloatT& b) {
     addition(*this, b, *this);
     return *this;
@@ -143,19 +157,34 @@ struct BigFloat {
   friend void addition(const BigFloatT& a,
                        const BigFloatT& b,
                        BigFloatT& result) {
-    (void)a;
-    (void)b;
-    (void)result;
+    if (a.exponent > b.exponent) {
+      result = b;
+      while (a.exponent > result.exponent) {
+        ++result.exponent;
+        result.mantissa *= 10;
+      }
+
+      addition(a.mantissa, result.mantissa, result.mantissa);
+    }
+
+    if (a.exponent < b.exponent) {
+      result = a;
+      while (result.exponent < b.exponent) {
+        ++result.exponent;
+        result.mantissa *= 10;
+      }
+
+      addition(result.mantissa, b.mantissa, result.mantissa);
+    }
+
+    result.normalize();
   }
 
   // reference to the 'result' argument CAN BE THE SAME with the 'a' or
   // 'b' arguments
-  friend void substraction(const BigFloatT& a,
-                           const BigFloatT& b,
-                           BigFloatT& result) {
-    (void)a;
-    (void)b;
-    (void)result;
+  friend void substraction(const BigFloatT& a, BigFloatT b, BigFloatT& result) {
+    b.changeSign();
+    addition(a, b, result);
   }
 
   // reference to the 'result' argument SHOULD NOT BE THE SAME with the 'a'
