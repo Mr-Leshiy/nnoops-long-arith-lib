@@ -58,6 +58,8 @@ struct BigInteger {
 
   void setSign(bool v) { this->sign = v; }
 
+  void changeSign() { this->sign = this->sign == true ? false : true; }
+
   BigIntegerT operator-() const {
     BigIntegerT ret = *this;
     if (ret.value != UBigIntegerT::zero_value()) {
