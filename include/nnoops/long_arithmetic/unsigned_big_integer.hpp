@@ -134,6 +134,7 @@ struct UBigInteger {
   }
 
   UBigIntegerT operator--(int) {
+    // postfix operator
     UBigIntegerT ret = *this;
     --(*this);
     return ret;

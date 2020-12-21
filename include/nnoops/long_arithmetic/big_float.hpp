@@ -84,6 +84,32 @@ struct BigFloat {
     return ret;
   }
 
+  BigFloatT& operator++() {
+    // prefix operator
+    addition(*this, BigFloatT(1), *this);
+    return *this;
+  }
+
+  BigFloatT operator++(int) {
+    // postfix operator
+    BigFloatT ret = *this;
+    ++(*this);
+    return ret;
+  }
+
+  BigFloatT& operator--() {
+    // prefix operator
+    substraction(*this, BigFloatT(1), *this);
+    return *this;
+  }
+
+  BigFloatT operator--(int) {
+    // postfix operator
+    BigFloatT ret = *this;
+    --(*this);
+    return ret;
+  }
+
   BigFloatT& operator+=(const BigFloatT& b) {
     addition(*this, b, *this);
     return *this;
@@ -172,7 +198,6 @@ struct BigFloat {
       }
       addition(result.mantissa, b.mantissa, result.mantissa);
     }
-
     result.normalize();
   }
 
