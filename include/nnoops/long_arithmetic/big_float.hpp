@@ -157,23 +157,19 @@ struct BigFloat {
   friend void addition(const BigFloatT& a,
                        const BigFloatT& b,
                        BigFloatT& result) {
-    if (a.exponent > b.exponent) {
+    if (a.exponent <= b.exponent) {
       result = b;
-      while (a.exponent > result.exponent) {
-        ++result.exponent;
+      while (a.exponent < result.exponent) {
+        --result.exponent;
         result.mantissa *= 10;
       }
-
       addition(a.mantissa, result.mantissa, result.mantissa);
-    }
-
-    if (a.exponent < b.exponent) {
+    } else {
       result = a;
-      while (result.exponent < b.exponent) {
-        ++result.exponent;
+      while (result.exponent > b.exponent) {
+        --result.exponent;
         result.mantissa *= 10;
       }
-
       addition(result.mantissa, b.mantissa, result.mantissa);
     }
 

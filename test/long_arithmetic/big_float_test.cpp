@@ -11,7 +11,6 @@ TEST(BigFloat, addition_test) {
   BigFloatT val1("3124.3312");
   BigFloatT val2("-12.41551");
 
-  EXPECT_EQ(toPrettyString(val1 + val2), "");
   EXPECT_EQ(val1 + val2, BigFloatT("3111.91569"));
   EXPECT_EQ(val2 + val1, BigFloatT("3111.91569"));
 
@@ -20,6 +19,24 @@ TEST(BigFloat, addition_test) {
 
   EXPECT_EQ(val1 + val2, BigFloatT("0.31241812"));
   EXPECT_EQ(val2 + val1, BigFloatT("0.31241812"));
+
+  val1 = BigFloatT("2041.0");
+  val2 = BigFloatT("4145000.0");
+
+  EXPECT_EQ(val1 + val2, BigFloatT("4147041"));
+  EXPECT_EQ(val2 + val1, BigFloatT("4147041"));
+
+  val1 = BigFloatT("5.0");
+  val2 = BigFloatT("15.0");
+
+  EXPECT_EQ(val1 + val2, BigFloatT("20"));
+  EXPECT_EQ(val2 + val1, BigFloatT("20"));
+
+  val1 = BigFloatT("4120000.0");
+  val2 = BigFloatT("0.00100312");
+
+  EXPECT_EQ(val1 + val2, BigFloatT("4120000.00100312"));
+  EXPECT_EQ(val2 + val1, BigFloatT("4120000.00100312"));
 }
 
 TEST(BigFloat, multiplication_test) {
