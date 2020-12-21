@@ -39,6 +39,40 @@ TEST(BigFloat, addition_test) {
   EXPECT_EQ(val2 + val1, BigFloatT("4120000.00100312"));
 }
 
+TEST(BigFloat, substraction_test) {
+  using BigFloatT = BigFloat<1024>;
+
+  BigFloatT val1("3124.3312");
+  BigFloatT val2("-12.41551");
+
+  EXPECT_EQ(val1 - val2, BigFloatT("3136.74671"));
+  EXPECT_EQ(val2 - val1, BigFloatT("-3136.74671"));
+
+  val1 = BigFloatT("0.312415");
+  val2 = BigFloatT("0.00000312");
+
+  EXPECT_EQ(val1 - val2, BigFloatT("0.31241188"));
+  EXPECT_EQ(val2 - val1, BigFloatT("-0.31241188"));
+
+  val1 = BigFloatT("2041.0");
+  val2 = BigFloatT("4145000.0");
+
+  EXPECT_EQ(val1 - val2, BigFloatT("-4142959.0"));
+  EXPECT_EQ(val2 - val1, BigFloatT("4142959.0"));
+
+  val1 = BigFloatT("5.0");
+  val2 = BigFloatT("15.0");
+
+  EXPECT_EQ(val1 - val2, BigFloatT("-10"));
+  EXPECT_EQ(val2 - val1, BigFloatT("10"));
+
+  val1 = BigFloatT("4120000.0");
+  val2 = BigFloatT("0.00100312");
+
+  EXPECT_EQ(val1 - val2, BigFloatT("4119999.99899688"));
+  EXPECT_EQ(val2 - val1, BigFloatT("-4119999.99899688"));
+}
+
 TEST(BigFloat, multiplication_test) {
   using BigFloatT = BigFloat<1024>;
 
