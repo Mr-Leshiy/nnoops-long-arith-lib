@@ -1,4 +1,4 @@
-![CI](https://github.com/Mr-Leshiy/nnoops-nnoops-long-arith-lib/workflows/CI/badge.svg)
+![CI](https://github.com/Mr-Leshiy/nnoops-long-arith-lib/workflows/CI/badge.svg)
 
 # Nnoops long arithmetic library
 This library provides realisation of the long integer numbers(signed and unsigned) and big float numbers.
