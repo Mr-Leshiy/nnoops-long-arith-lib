@@ -5,8 +5,21 @@
 #include "nnoops/long_arithmetic/big_float.hpp"
 using namespace nnoops;
 
-TEST(BigFloat, addition_test) {
-  using BigFloatT = BigFloat<1024>;
+template <uint64_t SIZE, typename BASE_T>
+struct BigFloatTestCase {
+  const static uint64_t size = SIZE;
+  using base_t = BASE_T;
+};
+
+template <typename T>
+struct BigFloatTest : public ::testing::Test {};
+
+TYPED_TEST_SUITE_P(BigFloatTest);
+
+TYPED_TEST_P(BigFloatTest, addition_test) {
+  const static uint64_t size = TypeParam::size;
+  using base_t = typename TypeParam::base_t;
+  using BigFloatT = BigFloat<size, base_t>;
 
   BigFloatT val1("3124.3312");
   BigFloatT val2("-12.41551");
@@ -45,8 +58,10 @@ TEST(BigFloat, addition_test) {
   EXPECT_EQ(val1, BigFloatT("4120002.0"));
 }
 
-TEST(BigFloat, substraction_test) {
-  using BigFloatT = BigFloat<1024>;
+TYPED_TEST_P(BigFloatTest, substraction_test) {
+  const static uint64_t size = TypeParam::size;
+  using base_t = typename TypeParam::base_t;
+  using BigFloatT = BigFloat<size, base_t>;
 
   BigFloatT val1("3124.3312");
   BigFloatT val2("-12.41551");
@@ -85,8 +100,10 @@ TEST(BigFloat, substraction_test) {
   EXPECT_EQ(val1, BigFloatT("4119998.0"));
 }
 
-TEST(BigFloat, multiplication_test) {
-  using BigFloatT = BigFloat<1024>;
+TYPED_TEST_P(BigFloatTest, multiplication_test) {
+  const static uint64_t size = TypeParam::size;
+  using base_t = typename TypeParam::base_t;
+  using BigFloatT = BigFloat<size, base_t>;
 
   BigFloatT val1("3124.3312");
   BigFloatT val2("-12.41551");
@@ -112,8 +129,10 @@ TEST(BigFloat, multiplication_test) {
   EXPECT_EQ(val2 * val1, BigFloatT("0.0000009747348"));
 }
 
-TEST(BigFloat, inverse_test) {
-  using BigFloatT = BigFloat<1024>;
+TYPED_TEST_P(BigFloatTest, inverse_test) {
+  const static uint64_t size = TypeParam::size;
+  using base_t = typename TypeParam::base_t;
+  using BigFloatT = BigFloat<size, base_t>;
 
   BigFloatT val("5.0");
 
@@ -140,8 +159,10 @@ TEST(BigFloat, inverse_test) {
   EXPECT_EQ(val.inverse(), BigFloatT("-4.072398414856383"));
 }
 
-TEST(BigFloat, division_test) {
-  using BigFloatT = BigFloat<1024>;
+TYPED_TEST_P(BigFloatTest, division_test) {
+  const static uint64_t size = TypeParam::size;
+  using base_t = typename TypeParam::base_t;
+  using BigFloatT = BigFloat<size, base_t>;
 
   // accuracy - 5
   BigFloatT val1("13.0", 5);
@@ -161,6 +182,40 @@ TEST(BigFloat, division_test) {
   EXPECT_EQ(val1 / val1, BigFloatT("1.0"));
   EXPECT_EQ(val2 / val2, BigFloatT("1.0"));
 }
+
+REGISTER_TYPED_TEST_SUITE_P(BigFloatTest,
+                            addition_test,
+                            substraction_test,
+                            multiplication_test,
+                            inverse_test,
+                            division_test);
+
+typedef ::testing::Types<BigFloatTestCase<64, uint8_t>,
+                         BigFloatTestCase<128, uint8_t>,
+                         BigFloatTestCase<256, uint8_t>,
+                         BigFloatTestCase<512, uint8_t>,
+                         BigFloatTestCase<1024, uint8_t>,
+                         BigFloatTestCase<2048, uint8_t>,
+                         BigFloatTestCase<4096, uint8_t>,
+                         BigFloatTestCase<64, uint16_t>,
+                         BigFloatTestCase<128, uint16_t>,
+                         BigFloatTestCase<256, uint16_t>,
+                         BigFloatTestCase<512, uint16_t>,
+                         BigFloatTestCase<1024, uint16_t>,
+                         BigFloatTestCase<2048, uint16_t>,
+                         BigFloatTestCase<4096, uint16_t>,
+                         BigFloatTestCase<64, uint32_t>,
+                         BigFloatTestCase<128, uint32_t>,
+                         BigFloatTestCase<256, uint32_t>,
+                         BigFloatTestCase<512, uint32_t>,
+                         BigFloatTestCase<1024, uint32_t>,
+                         BigFloatTestCase<2048, uint32_t>,
+                         BigFloatTestCase<4096, uint32_t>>
+    BigFloatTestCases;
+
+INSTANTIATE_TYPED_TEST_SUITE_P(BigFloatTestSuite,
+                               BigFloatTest,
+                               BigFloatTestCases);
 
 TEST(BigFloat, toPrettyString_test) {
   BigFloat<> val(1234);

@@ -49,7 +49,7 @@ struct BigFloat {
     return *this;
   }
 
-  BigFloat(std::string str, uint64_t accuracy = 200) : accuracy(accuracy) {
+  BigFloat(std::string str, uint64_t accuracy = 100) : accuracy(accuracy) {
     // find '.' and remove it
     size_t position = str.find('.');
     // does not find '.'
@@ -336,8 +336,8 @@ struct BigFloat {
  private:
   int64_t exponent{};
   BigIntegerT mantissa{};
-  // default accuracy is 200
-  int64_t accuracy{200};
+  // default accuracy is 100
+  int64_t accuracy{100};
 };
 
 extern template struct BigFloat<32>;
