@@ -252,8 +252,6 @@ struct BigFloat {
       }
       return val.mantissa.compareTo(b.mantissa);
     }
-
-    return 0;
   }
 
   void setAccuracy(int64_t val) {
