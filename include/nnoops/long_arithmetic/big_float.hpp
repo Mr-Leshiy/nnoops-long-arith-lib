@@ -235,15 +235,25 @@ struct BigFloat {
   // return -1 if this less than b,
   // return 1 if this bigger than b
   // return 0 if this equal to b
-  int compareTo(const BigFloatT& val) const {
-    if (this->exponent < val.exponent) {
-      return -1;
-    }
-    if (this->exponent > val.exponent) {
-      return 1;
+  int compareTo(const BigFloatT& b) const {
+    BigFloatT val;
+    if (this->exponent <= b.exponent) {
+      val = b;
+      while (this->exponent < val.exponent) {
+        --val.exponent;
+        val.mantissa *= 10;
+      }
+      return this->mantissa.compareTo(val.mantissa);
+    } else {
+      val = *this;
+      while (val.exponent < b.exponent) {
+        --val.exponent;
+        val.mantissa *= 10;
+      }
+      return val.mantissa.compareTo(b.mantissa);
     }
 
-    return this->mantissa.compareTo(val.mantissa);
+    return 0;
   }
 
   void setAccuracy(int64_t val) {

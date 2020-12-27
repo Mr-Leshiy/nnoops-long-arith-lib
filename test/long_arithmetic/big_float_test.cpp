@@ -16,6 +16,96 @@ struct BigFloatTest : public ::testing::Test {};
 
 TYPED_TEST_SUITE_P(BigFloatTest);
 
+TYPED_TEST_P(BigFloatTest, comparison_test) {
+  const static uint64_t size = TypeParam::size;
+  using base_t = typename TypeParam::base_t;
+  using BigFloatT = BigFloat<size, base_t>;
+
+  BigFloatT val1("0.312");
+  BigFloatT val2("0.32141");
+
+  EXPECT_TRUE(val1 == val1);
+  EXPECT_FALSE(val1 == val2);
+  EXPECT_FALSE(val1 != val1);
+  EXPECT_TRUE(val1 != val2);
+
+  EXPECT_TRUE(val1 < val2);
+  EXPECT_FALSE(val2 < val1);
+  EXPECT_FALSE(val1 < val1);
+  EXPECT_FALSE(val2 < val2);
+
+  EXPECT_FALSE(val1 > val2);
+  EXPECT_TRUE(val2 > val1);
+  EXPECT_FALSE(val1 > val1);
+  EXPECT_FALSE(val2 > val2);
+
+  EXPECT_TRUE(val1 <= val2);
+  EXPECT_FALSE(val2 <= val1);
+  EXPECT_TRUE(val1 <= val1);
+  EXPECT_TRUE(val2 <= val2);
+
+  EXPECT_FALSE(val1 >= val2);
+  EXPECT_TRUE(val2 >= val1);
+  EXPECT_TRUE(val1 >= val1);
+  EXPECT_TRUE(val2 >= val2);
+
+  val1 = BigFloatT("-452.41");
+  val2 = BigFloatT("0.415");
+
+  EXPECT_TRUE(val1 == val1);
+  EXPECT_FALSE(val1 == val2);
+  EXPECT_FALSE(val1 != val1);
+  EXPECT_TRUE(val1 != val2);
+
+  EXPECT_TRUE(val1 < val2);
+  EXPECT_FALSE(val2 < val1);
+  EXPECT_FALSE(val1 < val1);
+  EXPECT_FALSE(val2 < val2);
+
+  EXPECT_FALSE(val1 > val2);
+  EXPECT_TRUE(val2 > val1);
+  EXPECT_FALSE(val1 > val1);
+  EXPECT_FALSE(val2 > val2);
+
+  EXPECT_TRUE(val1 <= val2);
+  EXPECT_FALSE(val2 <= val1);
+  EXPECT_TRUE(val1 <= val1);
+  EXPECT_TRUE(val2 <= val2);
+
+  EXPECT_FALSE(val1 >= val2);
+  EXPECT_TRUE(val2 >= val1);
+  EXPECT_TRUE(val1 >= val1);
+  EXPECT_TRUE(val2 >= val2);
+
+  val1 = BigFloatT("-452.41");
+  val2 = BigFloatT("-0.415");
+
+  EXPECT_TRUE(val1 == val1);
+  EXPECT_FALSE(val1 == val2);
+  EXPECT_FALSE(val1 != val1);
+  EXPECT_TRUE(val1 != val2);
+
+  EXPECT_TRUE(val1 < val2);
+  EXPECT_FALSE(val2 < val1);
+  EXPECT_FALSE(val1 < val1);
+  EXPECT_FALSE(val2 < val2);
+
+  EXPECT_FALSE(val1 > val2);
+  EXPECT_TRUE(val2 > val1);
+  EXPECT_FALSE(val1 > val1);
+  EXPECT_FALSE(val2 > val2);
+
+  EXPECT_TRUE(val1 <= val2);
+  EXPECT_FALSE(val2 <= val1);
+  EXPECT_TRUE(val1 <= val1);
+  EXPECT_TRUE(val2 <= val2);
+
+  EXPECT_FALSE(val1 >= val2);
+  EXPECT_TRUE(val2 >= val1);
+  EXPECT_TRUE(val1 >= val1);
+  EXPECT_TRUE(val2 >= val2);
+}
+
 TYPED_TEST_P(BigFloatTest, addition_test) {
   const static uint64_t size = TypeParam::size;
   using base_t = typename TypeParam::base_t;
@@ -184,6 +274,7 @@ TYPED_TEST_P(BigFloatTest, division_test) {
 }
 
 REGISTER_TYPED_TEST_SUITE_P(BigFloatTest,
+                            comparison_test,
                             addition_test,
                             substraction_test,
                             multiplication_test,
