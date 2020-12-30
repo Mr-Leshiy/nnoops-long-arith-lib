@@ -1,4 +1,4 @@
-name: Create Archive
+name: Publish vcpkg package
 on:
   pull_request:
     branches:
