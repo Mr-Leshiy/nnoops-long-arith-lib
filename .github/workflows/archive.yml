@@ -1,6 +1,6 @@
 name: Publish vcpkg package
 on:
-  pull_request:
+  push:
     branches:
       - master
 jobs: 
@@ -20,5 +20,5 @@ jobs:
         author_name: Mr-Leshiy
         author_email: leshiy12345678@gmail.com
         message: 'publish vcpkg'
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.ADMIN_TOKEN }}
     
