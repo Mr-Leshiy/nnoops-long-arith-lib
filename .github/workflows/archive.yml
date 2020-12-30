@@ -2,7 +2,7 @@ name: Create Archive
 on:
   push:
     branches:
-      - masterx
+      - master
 jobs: 
   build:
     runs-on: ubuntu-latest
