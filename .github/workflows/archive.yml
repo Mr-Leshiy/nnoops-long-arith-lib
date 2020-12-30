@@ -1,5 +1,8 @@
 name: Create Archive
-on: [push]
+on:
+  push:
+    branches:
+      - masterx
 jobs: 
   build:
     runs-on: ubuntu-latest
@@ -11,3 +14,10 @@ jobs:
         filename: 'nnoops-long-arith-vcpkg.zip'
         path: vcpkg/
         type: zip
+      uses: EndBug/add-and-commit@v6
+      with:
+        author_name: Mr-Leshiy
+        author_email: leshiy12345678@gmail.com
+        message: 'publish vcpkg'
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
