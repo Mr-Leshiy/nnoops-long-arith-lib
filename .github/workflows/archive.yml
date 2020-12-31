@@ -14,12 +14,17 @@ jobs:
         filename: 'nnoops-long-arith-vcpkg.zip'
         path: vcpkg/
         type: zip
-    - name: Publish
-      uses: EndBug/add-and-commit@v6
-      with:
-        author_name: Mr-Leshiy
-        author_email: leshiy12345678@gmail.com
-        message: 'publish vcpkg'
-        token: ${{ secrets.ADMIN_TOKEN }}
-        
-    
+    - name: Create PR
+        if: success()
+        id: cpr
+        uses: peter-evans/create-pull-request@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update vcpkg archive
+          committer: Mr-Leshiy Mr-Leshiy leshiy12345678@gmail.com
+          author: Mr-Leshiy Mr-Leshiy leshiy12345678@gmail.com
+          title: "Update the archive of the vcpkg"
+          draft: false
+          branch: update-vcpkg-archive
+          delete-branch: true
+          request-to-parent: false
