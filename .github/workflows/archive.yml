@@ -15,8 +15,6 @@ jobs:
         path: vcpkg/
         type: zip
     - name: Create PR
-        if: success()
-        id: cpr
         uses: peter-evans/create-pull-request@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
