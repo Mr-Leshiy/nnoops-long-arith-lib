@@ -19,8 +19,8 @@ jobs:
       with:
         token: ${{ secrets.ADMIN_TOKEN }}
         commit-message: Update vcpkg archive
-        committer: Mr-Leshiy leshiy12345678@gmail.com
-        author: Mr-Leshiy leshiy12345678@gmail.com
+        committer: Mr-Leshiy <leshiy12345678@gmail.com>
+        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
         title: "Update the archive of the vcpkg"
         draft: false
         branch: update-vcpkg-archive
