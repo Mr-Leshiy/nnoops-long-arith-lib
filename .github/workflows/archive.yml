@@ -21,4 +21,5 @@ jobs:
         author_email: leshiy12345678@gmail.com
         message: 'publish vcpkg'
         token: ${{ secrets.ADMIN_TOKEN }}
+        
     
