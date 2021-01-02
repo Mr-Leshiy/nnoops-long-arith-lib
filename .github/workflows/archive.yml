@@ -2,7 +2,9 @@ name: Publish vcpkg package
 on:
   push:
     branches:
-      - master
+      - feature/update_archive.yml
+    paths:
+      - 'vcpkg/*'
 jobs: 
   build:
     runs-on: ubuntu-latest
