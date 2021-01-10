@@ -13,7 +13,7 @@ jobs:
     - name: Archive Vcpkg
       uses: thedoctor0/zip-release@master
       with:
-        filename: 'nnoops-long-arith-vcpkg.zip'
+        filename: 'nnoops-long-arith-lib-vcpkg.zip'
         path: vcpkg/
         type: zip
     - name: Create PR
