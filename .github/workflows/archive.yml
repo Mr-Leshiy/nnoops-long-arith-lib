@@ -14,8 +14,8 @@ jobs:
       uses: thedoctor0/zip-release@master
       with:
         filename: 'nnoops-long-arith-lib-vcpkg.zip'
-        path: vcpkg/
-        type: zip
+        directory: vcpkg
+        type: tar
     - name: Create PR
       uses: peter-evans/create-pull-request@v3
       with:
