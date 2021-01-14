@@ -1,4 +1,4 @@
 
 Source: nnoops-long-arith-lib
-Version: 0.0.3
+Version: 0.0.1
 Description: This library provides realisation of the long integer numbers(signed and unsigned) and big float numbers.
