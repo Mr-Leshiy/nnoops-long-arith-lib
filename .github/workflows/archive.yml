@@ -1,8 +1,6 @@
 name: Publish vcpkg package
 on:
   push:
-    branches:
-      - master
     paths:
       - 'vcpkg/*'
 jobs: 
