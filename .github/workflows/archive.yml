@@ -15,7 +15,12 @@ jobs:
       with:
         filename: 'nnoops-long-arith-lib-vcpkg.zip'
         directory: vcpkg
-        type: tar
+        type: zip
+    - name: Move archive to the root directory
+      run: |
+        cp vcpkg/nnoops-long-arith-lib-vcpkg.zip .
+        rm vcpkg/nnoops-long-arith-lib-vcpkg.zip
+
     - name: Create PR
       uses: peter-evans/create-pull-request@v3
       with:
